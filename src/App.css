@@ -1,0 +1,571 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  max-width: 1200px;
+  width: 95%;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  text-align: center;
+  flex: 1;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.view-toggle button {
+  padding: 10px 20px;
+  border: 2px solid #3498db;
+  background: white;
+  color: #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.view-toggle button.active {
+  background: #3498db;
+  color: white;
+}
+
+.view-toggle button:hover {
+  background: #2980b9;
+  color: white;
+}
+
+/* Контейнеры для видов */
+.notes-view,
+.calendar-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Стили для формы заметок */
+.note-form-container {
+  margin-bottom: 30px;
+  flex-shrink: 0;
+}
+
+.toggle-form-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
+  font-weight: 600;
+}
+
+.toggle-form-btn:hover {
+  background: #2980b9;
+}
+
+.note-form {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+  border: 1px solid #e9ecef;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.submit-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-weight: 600;
+}
+
+.submit-btn:hover {
+  background: #219a52;
+}
+
+/* Стили для списка заметок */
+.note-list {
+  display: grid;
+  gap: 20px;
+  flex: 1;
+  align-content: flex-start;
+}
+
+.note-item {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  border-left: 5px solid #3498db;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+.note-item.completed {
+  opacity: 0.8;
+  border-left-color: #27ae60;
+  background: #f8fff9;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+
+.note-header h3 {
+  color: #2c3e50;
+  margin-right: 10px;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.note-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.note-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 5px;
+  transition: all 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.complete-btn {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.1) !important;
+}
+
+.complete-btn.completed {
+  color: #95a5a6;
+  background: rgba(149, 165, 166, 0.1) !important;
+}
+
+.complete-btn:hover {
+  background: rgba(39, 174, 96, 0.2) !important;
+}
+
+.edit-btn {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1) !important;
+}
+
+.edit-btn:hover {
+  background: rgba(52, 152, 219, 0.2) !important;
+}
+
+.delete-btn {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1) !important;
+}
+
+.delete-btn:hover {
+  background: rgba(231, 76, 60, 0.2) !important;
+}
+
+.note-content {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #7f8c8d;
+  padding-top: 15px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.due-date {
+  color: #e67e22;
+  font-weight: bold;
+  background: #fffaf0;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.created-date {
+  color: #95a5a6;
+}
+
+/* Стили для редактирования заметки */
+.note-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background: #219a52;
+}
+
+.cancel-btn {
+  background: #95a5a6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #7f8c8d;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 40px;
+  color: #7f8c8d;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.calendar {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  flex-shrink: 0;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.nav-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: #ddd;
+  flex: 1;
+}
+
+.calendar-weekday {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.calendar-day {
+  background: white;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s;
+}
+
+.calendar-day.other-month {
+  background: #f8f9fa;
+  color: #bdc3c7;
+}
+
+.calendar-day.today {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+}
+
+.calendar-day:hover {
+  background: #f8f9fa;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.calendar-day.other-month .day-number {
+  color: #bdc3c7;
+}
+
+.day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.calendar-event {
+  background: #3498db;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calendar-event:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.calendar-event.completed {
+  background: #27ae60;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+  
+  .app {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    border-radius: 10px;
+    min-height: calc(100vh - 20px);
+  }
+  
+  .app-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .note-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .note-actions {
+    align-self: stretch;
+    justify-content: center;
+  }
+  
+  .calendar-day {
+    min-height: 80px;
+    padding: 8px;
+  }
+  
+  .calendar-event {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+  
+  .calendar-weekday {
+    padding: 15px 5px;
+    font-size: 0.9rem;
+  }
+  
+  .note-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .view-toggle {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .view-toggle button {
+    width: 100%;
+  }
+  
+  .calendar-header {
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .calendar-header h2 {
+    font-size: 1.4rem;
+  }
+}
